@@ -49,16 +49,13 @@ class ViewIndex {
       tagSelected.classList.remove("selected-tag");
       
       //ON ENLÈVE LE TAG SELECTIONNÉ DE L'ARRAY DE TAGS SELECTIONNÉS
-      for (let i = 0 ; i < this.listTagsSelected.length; i++) {
-            
+      for (let i = 0 ; i < this.listTagsSelected.length; i++) {           
         if(this.listTagsSelected[i] === contentTag) {
           this.listTagsSelected.splice(i , 1);
           break;
         }
       }
     }
-
-    //SI LE TAG N'EST PAS DÉJÀ SELECTIONNÉ, ON LUI AJOUTE LA CLASS SELECTED
     else {
       el.classList.add("selected-tag");
       this.listTagsSelected.push(contentTag); 
@@ -67,19 +64,14 @@ class ViewIndex {
     // SI L'ARRAY DE TAG SÉLÉCTIONNÉ N'EST PAS VIDE, DONC SUPÉRIEUR À 0
 
     if(this.listTagsSelected.length > 0) { 
-
-    //ON PARCOURS CHAQUE PHOTOGRAPHE, 
   
       for (let i = 0 ; i < listPhotograph.length; i ++) {   
         var listTagsPhotograph = listPhotograph[i].getElementsByClassName("tag");
         let isFound = false;
-      
-        //POUR CHAQUE PHOTOGRAPHE, ON PARCOURS SA LISTE DE TAGS
-        for(let j = 0 ; j < listTagsPhotograph.length ; j ++) {
-      
-          let tagContent = listTagsPhotograph[j].textContent;
   
-          //SI PARMIS LA LISTE DE TAGS SÉLÉCTIONNÉS, ON TROUVE UNE CORRESPONDANCE AVEC LES TAGS D'UN PHOTOGRAPHE;
+        for(let j = 0 ; j < listTagsPhotograph.length ; j ++) {
+          let tagContent = listTagsPhotograph[j].textContent;
+            //SI PARMIS LA LISTE DE TAGS SÉLÉCTIONNÉS, ON TROUVE UNE CORRESPONDANCE AVEC LES TAGS D'UN PHOTOGRAPHE;
           //ALORS IS FOUND DEVIENT TRUE;
           if(this.listTagsSelected.includes(tagContent)) {      
             listPhotograph[i].classList.remove("tag-not-found"); 
