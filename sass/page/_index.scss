@@ -1,0 +1,73 @@
+
+.main-header {
+  padding: 1em 2em;
+
+  .link-contain {
+    text-align: center;
+    margin: 0 auto 1em auto;
+    display: block;
+    background-color: #DB8876;
+    padding: 0.3em;
+    width: 170px;
+  }
+}
+
+.nav-items {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-photographer {
+  color: $primary-color;
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+#photographers {
+  padding-top: 2em;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  
+}
+
+.artist-card {
+  width: 33%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-bottom: 2em;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  .name {
+    color: $primary-color-light;
+    margin-bottom: 0.1em;
+  }
+  
+  .location {
+    color: $primary-color;
+  }
+
+  .tagline {
+    font-size: 0.9em;
+  }
+
+  .price {
+    color: $grey;
+    font-size: 0.8em;
+    margin-bottom: 0.5em;
+  }
+}
+
+
+.tag-not-found {
+  display: none;
+}
