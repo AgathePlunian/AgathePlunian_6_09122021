@@ -21,16 +21,35 @@ class ViewProfil {
     let mediaSection = document.getElementById("photograph-pictures");
     mediaSection.innerHTML = '<div class="input-select"><label>Trier par</label><select id="filter"><option value="popularité">Popularité</option><option value = "date">Date</option><option value = "titre">Titre</option></select><div id="media-section"></div></div>';
     
-   /* mediasfiltered.sort(function(a,b) {
-      return b.likes - a.likes;
-      })
-    */
-    //AFFICHAGE DES MÉDIAS
+    //AFFICHAGE DES MÉDIAS TRIÉ PAR DEFAUT SELON LA POPULARITÉ
+
     mediaSection = document.getElementById("media-section");  
-    console.log(mediasfiltered);
-   
-   // let filter = document.getElementById("filter");
-    
+
+    let valueSelected = filter.value;
+      console.log(valueSelected);
+ 
+    let basicRender = mediasfiltered.sort(function(a,b) {
+      return b.likes - a.likes;
+    })
+      
+    basicRender.forEach(media => {
+      
+      let divContainer = document.createElement('div');
+      divContainer.classList.add("media-container");
+
+      ///NE PAS OUBLIER DE FAIRE LA FONCTION CHELOU
+      if(media.video) {
+        divContainer.innerHTML = '<a class="img-link"><video controls width="250"><source src="images/'+ firstName +'/'+ media.video + '" type="video/mp4" ></video></a><div class="title-container"><p class="media-title">' + media.title +'</p><div class="likes-container"><p class="likes-number">'+ media.likes +'</p><i class="empty-heart far fa-heart"><i class="full-heart fas fa-heart"></i></i></div></div>';
+      }
+      else {
+        divContainer.innerHTML = '<a class="img-link"><img src="images/'+ firstName +'/'+ media.image + '"></a><div class="title-container"><p class="media-title">' + media.title +'</p><div class="likes-container"><p class="likes-number">'+ media.likes +'</p><i class="empty-heart far fa-heart"><i class="full-heart fas fa-heart"></i></i></div></div>';
+      }
+      mediaSection.appendChild(divContainer);
+      
+    })
+
+//AFFICHAGE SELON SELECT   
+      
    let arraySorted = [];
 
     filter.addEventListener('change' , (event) =>  {
@@ -47,14 +66,7 @@ class ViewProfil {
       else if(valueSelected == "date") {
         console.log("oui");
         arraySorted = mediasfiltered.sort(function (a, b) {
-          var titreA = a.title.toUpperCase(); // ignore upper and lowercase
-          var titreB = b.title.toUpperCase(); // ignore upper and lowercase
-            if (titreA < titreB) {
-              return -1;
-            }
-            if (titreA > titreB) {
-              return 1;
-            }
+          return new Date(b.date) - new Date(a.date);
         })
       }
 
@@ -73,41 +85,7 @@ class ViewProfil {
       }
       console.log(arraySorted);
     });
-    /*
-      if(valueSelected == "popularité") {
-        let arraySorted = mediasfiltered.sort(function(a,b) {
-          return b.likes - a.likes;
-          })
-        console.log(valueSelected);
-        return arraySorted;
-      }  
- 
-      else if(valueSelected == "date") {
-    
-        mediasfiltered.sort(function (a, b) {
-        let arraytest = new Date(a.date).getTime() - new Date(b.date).getTime();
-        console.log(arraytest);
-      })
-      
-        console.log(valueSelected);
-      }
-      */      
-    
-    mediasfiltered.forEach(media => {
-      
-      let divContainer = document.createElement('div');
-      divContainer.classList.add("media-container");
-
-      ///NE PAS OUBLIER DE FAIRE LA FONCTION CHELOU
-      if(media.video) {
-        divContainer.innerHTML = '<a class="img-link"><video controls width="250"><source src="images/'+ firstName +'/'+ media.video + '" type="video/mp4" ></video></a><div class="title-container"><p class="media-title">' + media.title +'</p><div class="likes-container"><p class="likes-number">'+ media.likes +'</p><i class="empty-heart far fa-heart"><i class="full-heart fas fa-heart"></i></i></div></div>';
-      }
-      else {
-        divContainer.innerHTML = '<a class="img-link"><img src="images/'+ firstName +'/'+ media.image + '"></a><div class="title-container"><p class="media-title">' + media.title +'</p><div class="likes-container"><p class="likes-number">'+ media.likes +'</p><i class="empty-heart far fa-heart"><i class="full-heart fas fa-heart"></i></i></div></div>';
-      }
-      mediaSection.appendChild(divContainer);
-      
-    })
+     
     
     let hearts = document.getElementsByClassName("empty-heart");
    
