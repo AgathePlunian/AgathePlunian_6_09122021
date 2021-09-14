@@ -19,7 +19,7 @@ class ViewProfil {
 
     //AFFICHAGE DE L'INPUT DE SELECTION DE TRI DES MÉDIAS   
     let mediaSection = document.getElementById("photograph-pictures");
-    mediaSection.innerHTML = '<div class="input-select"><label>Trier par</label><select id="filter"><option value="popularité">Popularité</option><option value = "Date">Date</option><option value = "Titre">Titre</option></select><div id="media-section"></div></div>';
+    mediaSection.innerHTML = '<div class="input-select"><label>Trier par</label><select id="filter"><option value="popularité">Popularité</option><option value = "date">Date</option><option value = "titre">Titre</option></select><div id="media-section"></div></div>';
     
    /* mediasfiltered.sort(function(a,b) {
       return b.likes - a.likes;
@@ -45,8 +45,30 @@ class ViewProfil {
       }
 
       else if(valueSelected == "date") {
-        arraySorted = mediasfiltered.sort(function(a,b) {
-          return a.likes - b.likes;
+        console.log("oui");
+        arraySorted = mediasfiltered.sort(function (a, b) {
+          var titreA = a.title.toUpperCase(); // ignore upper and lowercase
+          var titreB = b.title.toUpperCase(); // ignore upper and lowercase
+            if (titreA < titreB) {
+              return -1;
+            }
+            if (titreA > titreB) {
+              return 1;
+            }
+        })
+      }
+
+      else if(valueSelected == "titre") {
+      
+        arraySorted = mediasfiltered.sort(function (a, b) {
+          var titreA = a.title.toUpperCase(); // ignore upper and lowercase
+          var titreB = b.title.toUpperCase(); // ignore upper and lowercase
+            if (titreA < titreB) {
+              return -1;
+            }
+            if (titreA > titreB) {
+              return 1;
+            }
         })
       }
       console.log(arraySorted);
@@ -64,7 +86,7 @@ class ViewProfil {
     
         mediasfiltered.sort(function (a, b) {
         let arraytest = new Date(a.date).getTime() - new Date(b.date).getTime();
-      console.log(arraytest);
+        console.log(arraytest);
       })
       
         console.log(valueSelected);
