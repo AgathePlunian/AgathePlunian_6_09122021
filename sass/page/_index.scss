@@ -1,15 +1,26 @@
 
 .main-header {
   padding: 1em 2em;
+}
 
-  .link-contain {
-    text-align: center;
-    margin: 0 auto 1em auto;
-    display: block;
-    background-color: #DB8876;
-    padding: 0.3em;
-    width: 170px;
-  }
+.link-contain {
+  text-align: center;
+  margin: 0 auto 1em auto;
+  background-color: #DB8876;
+  padding: 0.3em 1em;
+  border-radius: 10px;
+  width: 170x;
+  display: none;
+  position: fixed;
+  top: 0.5em;
+  right: 43.5%;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-contain-display {
+  display: block;
 }
 
 .nav-items {

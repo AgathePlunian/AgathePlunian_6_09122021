@@ -1,13 +1,30 @@
-class ViewIndex {
-
+class ViewIndex extends AbstractView {
+ 
   //ARRAY TAGS SELECTIONNÉS
   constructor() {
+    super();
     this.listTagsSelected = new Array();
   }
-  
+
+  ///ANIMATE BUTTON TOP
+  animateTopButton() {
+    document.addEventListener("scroll", function(){
+      let button = document.getElementsByClassName("link-contain")[0];
+      let y = window.scrollY;
+       if(y >= 30){
+        button.classList.add("link-contain-display")
+       }
+
+       if(y == 0){
+        button.classList.remove("link-contain-display")
+       }
+    })
+  }
+
   //AFFICHAGE DES PHOTOGRAPHES PAR CARDS
   renderIndex(listPhotograph, tagsList) {
     this.renderTags(tagsList);
+    this.animateTopButton();
 
     let section = document.getElementById("photographers");
     listPhotograph.forEach(photograph => {
@@ -57,7 +74,7 @@ class ViewIndex {
       }
     }
     else {
-      el.classList.add("selected-tag");
+      tagSelected.classList.add("selected-tag");
       this.listTagsSelected.push(contentTag); 
     }
     

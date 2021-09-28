@@ -6,8 +6,16 @@
   background-color: $soft-grey;
   border-radius: 5px;
   display: flex;
-  padding: 2em;
+  padding: 1.5em;
   justify-content: space-between;
+}
+
+#card-bottom {
+  position: fixed;
+  bottom: 0;
+  right: 2em;
+  background-color: #DB8876;
+  padding: 1em;
 }
 
 .infos-photographer {
@@ -40,10 +48,10 @@
 
   .img-link {
     width: 100%;
-    display: block;
     height: 250px;
     overflow: hidden;
     margin-bottom:0.5em;
+    cursor: pointer;
 
     img {
       height: 100%;
