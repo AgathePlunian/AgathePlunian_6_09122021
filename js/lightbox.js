@@ -29,17 +29,17 @@ class Lightbox {
     lightboxContent.innerHTML = 
     `<div class="lightbox-container">
         <span id="btn-close">
-          <i class="fas fa-times"></i>
+        <img src="../images/icones/cross.svg" alt="close lightbox"/>
         </span>
         <div class="fleche-et-img">
           <span class="fleche" id="previous-img">
-            <i class="fas fa-chevron-left"></i>
+            <img src="../images/icones/chevron-left-solid.svg" alt="previous image" />
           </span>
           <div class="img-lightbox-container">
           ${this.tagMediaFactory(this.listMedias[this.indexOfMedia], this.firstName)}
           </div>
           <span class="fleche" id="next-img">
-            <i class="fas fa-chevron-right"></i>
+          <img src="../images/icones/chevron-right-solid.svg" alt="next image" />
           </soan>
         <div>
         <p class="lightbox-title">

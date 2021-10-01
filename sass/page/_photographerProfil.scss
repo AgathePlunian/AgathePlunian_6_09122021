@@ -1,3 +1,17 @@
+.info-photograph-name {
+  color: $primary-color-light;
+}
+
+.info-photograph-city {
+  margin-bottom: 0.5em;
+  color: $primary-color;
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.info-photograph-tagline {
+  color: $grey;
+}
 
 #profil-photographer {
   padding: 2em;
@@ -8,14 +22,40 @@
   display: flex;
   padding: 1.5em;
   justify-content: space-between;
+  margin-bottom: 1.5em;
 }
 
 #card-bottom {
+  border-radius: 5px 5px 0 0;
   position: fixed;
   bottom: 0;
   right: 2em;
   background-color: #DB8876;
-  padding: 1em;
+  padding: 1em 1.5em;
+  z-index: 1000;
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    margin-bottom: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+}
+
+.total-likes-container {
+  display: flex;
+
+    p {
+      margin-right: 8px;
+    }
+}
+
+.card-bottom-heart-container {
+  width: 20px;
+  display: block;
 }
 
 .infos-photographer {
@@ -29,17 +69,17 @@
 #media-section {
   display: flex;  
   flex-flow: wrap;
-  margin: auto;
+  margin:0 auto;
   width: 100%;
+  padding: 2em;
 }
 
 .media-container {
   width: 30%;
-  height: 300px;
+  max-width: 350px;
+  height: 350px;
   overflow: hidden;
   margin-bottom: 2em;
-  margin-left: 1.1em;
-  margin-right: 1.1em;
   
   .media-title {
     color: $primary-color;
@@ -47,19 +87,19 @@
   }
 
   .img-link {
-    width: 100%;
-    height: 250px;
+    border-radius: 5px;
     overflow: hidden;
+    height: 300px;
     margin-bottom:0.5em;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    img {
-      height: 100%;
-    }
+    img, video {
+     width: 130%;
+    
 
-    video {
-      width: 100%;
-      height: 100%;
     }
   }
 }
@@ -97,17 +137,22 @@
   }
 }
 
-
-
 .input-select {
+  margin-bottom: 2em;
   label {
     margin-right: 8px;
   }
 
   select {
+    border-radius: 5px 5px 0 0;
     background-color: $primary-color;
     color: white;
     padding: 1em;
     border: none;
+
+    option {
+      background-color: $primary-color;
+      border-bottom: white 1px solid;
+    }
   }
 }

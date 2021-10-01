@@ -33,24 +33,23 @@ body {
 h1 {
   font-family: "DM Sans", sans-serif;
   font-size: 2.2em;
-  font-weight: 700;
-  margin-bottom: 0.4em;
-  line-height: 1.5em;
+  font-weight: 500;
+  margin-bottom: 0.1em;
 }
 
 h2 {
   font-family: "DM Sans", sans-serif;
   font-size: 1.6em;
-  font-weight: 700;
-  margin-bottom: 0.7em;
+  font-weight: 500;
+  margin-bottom: 0.1em;
   line-height: 1.4em;
 }
 
 h3 {
   font-family: "DM Sans", sans-serif;
   font-size: 1.2em;
-  font-weight: 700;
-  margin-bottom: 0.5em;
+  font-weight: 500;
+  margin-bottom: 0.1em;
   line-height: 1.3em;
 }
 
@@ -137,6 +136,21 @@ p {
   display: none;
 }
 
+.info-photograph-name {
+  color: #D3573C;
+}
+
+.info-photograph-city {
+  margin-bottom: 0.5em;
+  color: #901C1C;
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.info-photograph-tagline {
+  color: #525252;
+}
+
 #profil-photographer {
   padding: 2em;
 }
@@ -147,14 +161,38 @@ p {
   display: flex;
   padding: 1.5em;
   justify-content: space-between;
+  margin-bottom: 1.5em;
 }
 
 #card-bottom {
+  border-radius: 5px 5px 0 0;
   position: fixed;
   bottom: 0;
   right: 2em;
   background-color: #DB8876;
-  padding: 1em;
+  padding: 1em 1.5em;
+  z-index: 1000;
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+  align-items: center;
+}
+#card-bottom p {
+  margin-bottom: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.total-likes-container {
+  display: flex;
+}
+.total-likes-container p {
+  margin-right: 8px;
+}
+
+.card-bottom-heart-container {
+  width: 20px;
+  display: block;
 }
 
 .infos-photographer {
@@ -168,35 +206,34 @@ p {
 #media-section {
   display: flex;
   flex-flow: wrap;
-  margin: auto;
+  margin: 0 auto;
   width: 100%;
+  padding: 2em;
 }
 
 .media-container {
   width: 30%;
-  height: 300px;
+  max-width: 350px;
+  height: 350px;
   overflow: hidden;
   margin-bottom: 2em;
-  margin-left: 1.1em;
-  margin-right: 1.1em;
 }
 .media-container .media-title {
   color: #901C1C;
   font-size: 1.1em;
 }
 .media-container .img-link {
-  width: 100%;
-  height: 250px;
+  border-radius: 5px;
   overflow: hidden;
+  height: 300px;
   margin-bottom: 0.5em;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.media-container .img-link img {
-  height: 100%;
-}
-.media-container .img-link video {
-  width: 100%;
-  height: 100%;
+.media-container .img-link img, .media-container .img-link video {
+  width: 130%;
 }
 
 .title-container {
@@ -230,14 +267,22 @@ p {
   opacity: 1;
 }
 
+.input-select {
+  margin-bottom: 2em;
+}
 .input-select label {
   margin-right: 8px;
 }
 .input-select select {
+  border-radius: 5px 5px 0 0;
   background-color: #901C1C;
   color: white;
   padding: 1em;
   border: none;
+}
+.input-select select option {
+  background-color: #901C1C;
+  border-bottom: white 1px solid;
 }
 
 .tag-list {
@@ -310,14 +355,11 @@ p {
   right: 0.5em;
   background-color: none;
   color: #901C1C;
-}
-#btn-close i {
-  font-size: 2.2em;
+  width: 40px;
 }
 
-.fleche i {
-  color: #901C1C;
-  font-size: 3em;
+.fleche {
+  width: 40px;
 }
 
 .fleche-et-img {
@@ -335,6 +377,69 @@ p {
 .img-lightbox-container img {
   width: fill;
   height: 100%;
+}
+
+.display-form-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.507);
+}
+
+.modal-form-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-form {
+  padding: 1em 1.5em;
+  background-color: #DB8876;
+  width: 420px;
+  border-radius: 5px;
+}
+
+#close-modal {
+  width: 20px;
+}
+
+.header-title-modal-form {
+  width: 90%;
+}
+
+.contact-form {
+  display: flex;
+  flex-flow: column;
+}
+.contact-form label {
+  margin-bottom: 0.2em;
+}
+.contact-form input {
+  border-radius: 5px;
+  border: none;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+}
+.contact-form .area-message {
+  border-radius: 5px;
+  resize: none;
+  padding: 0.5sem;
+  height: 100px;
+  margin-bottom: 1em;
+  border: none;
+  font-family: inherit;
+}
+
+#submit-contact-form-btn {
+  background-color: #901C1C;
+  color: white;
+  padding: 1em 2em;
+  width: fit-content;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */
