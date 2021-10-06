@@ -1,6 +1,5 @@
-
 .main-header {
-  padding: 1em 2em;
+  padding: 1em 0;
 }
 
 .link-contain {
@@ -24,6 +23,9 @@
 }
 
 .nav-items {
+  padding-top: 1em;
+  margin: 0 auto;
+  width: 90%;
   display: flex;
   flex-flow: row;
   justify-content: space-between;

@@ -3,20 +3,22 @@ class ViewProfil extends AbstractView {
   constructor(firstName) {
     super();
     this.mediasSorted = new Array();
-    this.firstName = firstName;
+  }
+//AFFICHAGE DE TOUTE LA PAGE PHOTOGRAPHE
+  render() {
+    this.renderProfil();
+    this.filterMedias();
+    this.renderCardBottom();
   }
 
-  render(photograph, mediasfiltered, firstName) {
-    this.renderProfil(photograph);
-    this.filterMedias(mediasfiltered, firstName);
-    this.renderCardBottom(photograph, mediasfiltered);
-  }
-      
-  renderCardBottom(photograph, mediasfiltered) {
+//AFFICHAGE CARD BOTTOM
+  renderCardBottom() {
+    let mediasFiltered = this.getVariable("mediasFiltered");
+    let photograph = this.getVariable("photograph");
     let cardBottom = document.getElementById("card-bottom"); 
     
     //SUM OF LIKES  
-    let allLikes = mediasfiltered.map(value => value.likes);
+    let allLikes = mediasFiltered.map(value => value.likes);
     let sumOfLikes = allLikes.reduce((x, y) => x + y);
 
     cardBottom.innerHTML = `
@@ -32,10 +34,10 @@ class ViewProfil extends AbstractView {
   }
 
   // METHODE AFFICHAGE DES INFORMATIONS DE PROFIL
-
-  renderProfil(photograph) {
+  renderProfil() {
     let photographInfo = document.getElementById("photograph-info");  
     let str="";
+    let photograph = this.getVariable("photograph");
     photograph.tags.forEach( tag => {
       str +='<li class = "tag">#' + tag + '</li>';  
     });
@@ -54,7 +56,9 @@ class ViewProfil extends AbstractView {
         </div>
         <div class="portrait-container">
           <img src="./images/ID-Portrait/${photograph.portrait}"></div>`;
-      this.renderInputSelect();
+     
+    
+    this.renderInputSelect();
       
       // AJOUT EVENTLISTER ON CLICK BUTTON CONTACT
        let contactBtn = document.getElementById("button-contact");
@@ -65,7 +69,8 @@ class ViewProfil extends AbstractView {
   }
 
   //FUNCTION ON CLICK BUTTON CONTACT
-  openModalContactForm(event, photograph) {
+  openModalContactForm(event) {
+    let photograph = this.getVariable("photograph");
     let formModalContainer = document.getElementById("form-modal-container");
     formModalContainer.classList.add("display-form-modal");
     
@@ -80,28 +85,51 @@ class ViewProfil extends AbstractView {
       </span>
     </div>
     <form class="contact-form">
-      <label>Prénom</label>
-      <input type="text">
+      <label for="firstName">Prénom</label>
+      <input type="text" id="firstName" name="firstName">
 
-      <label>Nom</label>
-      <input type="text">
+      <label for="lastName">Nom</label>
+      <input type="text" id="lastName" name="lastName">
 
-      <label>Email</label>
-      <input type="email">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email">
 
-      <label>Votre message</label>
-      <textarea class="area-message"></textarea>
+      <label for="message">Votre message</label>
+      <textarea class="area-message" id="message" name="message"></textarea>
 
       <input type="submit" value="Envoyer" id="submit-contact-form-btn">
     </form>`;
 
+    //EVENT LISTENER BTN CLOSE MODAL
     let btnCloseModal = document.getElementById("close-modal");
     btnCloseModal.addEventListener('click', (event) => {
       this.closeModalContactForm(event);
     })
 
+    //EVENT LISTENER ON SUBMIT BTN
+    let btnSubmit = document.getElementById("submit-contact-form-btn");
+    btnSubmit.addEventListener('click', (event) => {
+      this.onSubmitContactForm(event);
+    })
   }
 
+  //FUNCTION ON CLICK SUBMIT CONTACT FORM
+  onSubmitContactForm(event) {
+    event.preventDefault();
+    let modalForm = document.getElementById("form-modal-container");
+
+    let firstNameValue = document.getElementById("firstName").value;
+    let lastNameValue = document.getElementById("lastName").value;
+    let emailValue = document.getElementById("email").value;
+    let messageValue = document.getElementById("message").value;
+    console.log("Prénom: " + firstNameValue, ", Nom: " + lastNameValue, ", Email: " + emailValue, ", Message: " + messageValue);
+
+    modalForm.classList.remove("display-form-modal");
+    modalForm.innerHTML="";
+
+  }
+
+  //FUNCTION ON CLICK CLOSE MODAL
   closeModalContactForm(event) {
     let modalForm = document.getElementById("form-modal-container");
     modalForm.classList.remove("display-form-modal");
@@ -115,33 +143,36 @@ class ViewProfil extends AbstractView {
     mediaSection.innerHTML = `
       <div class="input-select">
         <label>Trier par</label>
-        <select id="filter">
-          <option value="popularité">Popularité</option>
-          <option value = "date">Date</option>
-          <option value = "titre">Titre</option>
-        </select>
+        <div role="listbox" id="filter">
+          <div class="select-input" role="option" value="popularité">Popularité<span><img/ src=""></span></div>
+          <div class="select-input" role="option" value="date">Date</div>
+          <div class="select-input" role="option" value="titre">Titre</div>
+        </div>
       </div>
       <div id="media-section"></div>
       `;
   }
 
-  filterMedias(mediasfiltered, firstName) {
-    this.mediasSorted = mediasfiltered.sort(function(a,b) {
+  //FUNCTION FILTER MEDIAS BY DEFAULT + ADD EVENT LISTENER ON FILTER BY
+ 
+  filterMedias() {
+    let mediasFiltered = this.getVariable("mediasFiltered");
+    this.mediasSorted = mediasFiltered.sort(function(a,b) {
       return b.likes - a.likes;
     })
 
       //AJOUT EVENT LISTENER ON CHANGE SELECT    
       let filter = document.getElementById("filter");
       filter.addEventListener('change', () => {
-        this.filterMediasBySelect(firstName);
+        this.filterMediasBySelect();
       })
-      this.renderMedias(firstName);
+      this.renderMedias();
   }
 
   /////FONCTION EVENTLISTER SELECT /////
 
-  filterMediasBySelect(firstName) {  
-    console.log(this.mediasSorted);
+  filterMediasBySelect() {  
+
     let valueSelected = filter.value;
     
     if(valueSelected == "popularité") {
@@ -170,13 +201,14 @@ class ViewProfil extends AbstractView {
           }
         }) 
       }
-      this.renderMedias(firstName);
+      this.renderMedias();
   }
 
 
-  // METHODE AFFICHAGE DE LA PARTIE MÉDIA //
-  renderMedias(firstName) {
+  // METHODE AFFICHAGE DE LA PARTIE MÉDIA 
+  renderMedias() {
     let mediaSection = document.getElementById("media-section");
+    let firstName = this.getVariable("firstName");
     mediaSection.innerHTML = "";
     
     this.mediasSorted.forEach(media => {
@@ -211,13 +243,14 @@ class ViewProfil extends AbstractView {
     let listImages = document.getElementsByClassName("img-link");
     for(var i = 0 ; i < listImages.length ; i++) {
       listImages[i].addEventListener ('click' , (event) => {
-        this.showLightbox(event, firstName);
+        this.showLightbox(event);
       })
     } 
   }
 
   //FACTORY TYPE OF MEDIAS
-  tagMediaFactory(media , firstName) {
+  tagMediaFactory(media) {
+    let firstName =  this.getVariable("firstName");
     if(media.video) {
       return `<video controls>
                   <source src="images/${firstName}/${media.video}" type="video/mp4">
@@ -229,13 +262,13 @@ class ViewProfil extends AbstractView {
   }
 
   //FUNCTION ONCLICK IMAGE
-  showLightbox(event ,firstName) {
+  showLightbox(event) {
     let idMedia = event.path[1].getAttribute("id");
     let lightbox = new Lightbox("lightbox", this.mediasSorted, idMedia, this.getVariable("firstName"));
     lightbox.show();
   }
     
-  //FONCTION AU CLICK AJOUTE OU ENLÈVE LIKE
+  //FUNCTION ONCLICK ADD OR REMOVE LIKE
   addLike(event) {  
     let fullHeart = event.target; 
     let paragraphNumberOfLikes = event.path[2].childNodes[1];

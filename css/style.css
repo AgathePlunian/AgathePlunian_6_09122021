@@ -60,7 +60,7 @@ p {
 }
 
 .main-header {
-  padding: 1em 2em;
+  padding: 1em 0;
 }
 
 .link-contain {
@@ -84,6 +84,9 @@ p {
 }
 
 .nav-items {
+  padding-top: 1em;
+  margin: 0 auto;
+  width: 90%;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
@@ -152,7 +155,8 @@ p {
 }
 
 #profil-photographer {
-  padding: 2em;
+  width: 90%;
+  margin: 0 auto;
 }
 
 #photograph-info {
@@ -204,16 +208,16 @@ p {
 }
 
 #media-section {
-  display: flex;
-  flex-flow: wrap;
-  margin: 0 auto;
-  width: 100%;
-  padding: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 28%);
+  /* 2 */
+  grid-gap: 1rem;
+  /* 3 */
+  justify-content: space-between;
+  /* 4 */
 }
 
 .media-container {
-  width: 30%;
-  max-width: 350px;
   height: 350px;
   overflow: hidden;
   margin-bottom: 2em;
@@ -232,8 +236,12 @@ p {
   justify-content: center;
   align-items: center;
 }
-.media-container .img-link img, .media-container .img-link video {
-  width: 130%;
+.media-container .img-link img {
+  object-fit: cover;
+  width: 160%;
+}
+.media-container .img-link video {
+  width: 100%;
 }
 
 .title-container {
@@ -269,19 +277,22 @@ p {
 
 .input-select {
   margin-bottom: 2em;
+  display: flex;
 }
 .input-select label {
-  margin-right: 8px;
+  margin-right: 20px;
+  font-weight: bold;
 }
-.input-select select {
-  border-radius: 5px 5px 0 0;
+.input-select #filter {
+  border-radius: 5px;
+  padding: 5px;
   background-color: #901C1C;
   color: white;
-  padding: 1em;
   border: none;
+  width: 150px;
 }
-.input-select select option {
-  background-color: #901C1C;
+.input-select #filter .select-input {
+  padding: 8px;
   border-bottom: white 1px solid;
 }
 
@@ -374,9 +385,8 @@ p {
   height: 500px;
   overflow: hidden;
 }
-.img-lightbox-container img {
-  width: fill;
-  height: 100%;
+.img-lightbox-container img, .img-lightbox-container video {
+  width: 100%;
 }
 
 .display-form-modal {

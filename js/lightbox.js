@@ -47,7 +47,7 @@ class Lightbox {
         </p>
       </div>`;
 
-        //ADD EVENT TO BTN CLOSE
+    //ADD EVENT TO BTN CLOSE
     let btnClose = document.getElementById("btn-close");
     btnClose.addEventListener('click' , (event) => {
     this.closeLightbox(event)
@@ -56,21 +56,40 @@ class Lightbox {
     //ADD EVENT TO RIGHT ARROW
     let rightArrow = document.getElementById("next-img");
     rightArrow.addEventListener('click' , (event) => {
-      this.showNextImg(event)
+      this.showNextImg()
     })
 
    //ADD EVENT TO LEFT ARROW
     let leftArrow = document.getElementById("previous-img");
     leftArrow.addEventListener('click' , (event) => {
-      this.showPreviousImg(event)
+      this.showPreviousImg()
+    })
+
+    document.addEventListener('keydown', (event) => {
+      this.checkKey(event)
     })
   }
          
+  checkKey(event) {
+    console.log(event);
+    event = event || window.event;
+
+    if (event.keyCode == '37') {
+        this.showNextImg()
+    }
+    if (event.keyCode == '39') {
+        this.showPreviousImg();
+    }
+}
+
+
   tagMediaFactory(media , firstName) {
+    console.log("appel tagmedia factory");
     if(media.video) {
-      return `<video controls width="250">
+      return `<video controls>
                 <source src="images/${firstName}/${media.video}" type="video/mp4">
               </video>`
+      
     }
     else {
       return `<img src="images/${firstName}/${media.image}"/>`
@@ -88,10 +107,10 @@ class Lightbox {
   }
 
   // LIGHTBOX SHOW PREVIOUS IMAGE ON CLICK ARROW
-  showPreviousImg(event) {  
+  showPreviousImg() {  
 
     if(this.indexOfMedia == 0) {
-      this.indexOfMedia = this.listMedias.length;
+      this.indexOfMedia = this.listMedias.length-1;
     }
     else {
       this.indexOfMedia = this.indexOfMedia - 1;
@@ -101,8 +120,8 @@ class Lightbox {
 
 
   // LIGHTBOX SHOW NEXT IMAGE ON CLICK ARROW
-  showNextImg(event) {
-    if(this.indexOfMedia == this.listMedias.length) {
+  showNextImg() {
+    if(this.indexOfMedia == this.listMedias.length-1) {
       this.indexOfMedia = 0;
     }
     else {

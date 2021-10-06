@@ -14,8 +14,10 @@
 }
 
 #profil-photographer {
-  padding: 2em;
+  width: 90%;
+  margin: 0 auto;
 }
+
 #photograph-info {
   background-color: $soft-grey;
   border-radius: 5px;
@@ -67,19 +69,19 @@
 }
 
 #media-section {
-  display: flex;  
-  flex-flow: wrap;
-  margin:0 auto;
-  width: 100%;
-  padding: 2em;
+  display: grid;  
+  grid-template-columns: repeat(auto-fill, 28%); /* 2 */
+  grid-gap: 1rem; /* 3 */
+  justify-content: space-between; /* 4 */
+  
 }
 
+
 .media-container {
-  width: 30%;
-  max-width: 350px;
   height: 350px;
   overflow: hidden;
   margin-bottom: 2em;
+  
   
   .media-title {
     color: $primary-color;
@@ -96,10 +98,12 @@
     justify-content: center;
     align-items: center;
 
-    img, video {
-     width: 130%;
-    
-
+    img{
+     object-fit: cover;
+     width: 160%;
+    }
+    video {
+      width: 100%;
     }
   }
 }
@@ -139,20 +143,23 @@
 
 .input-select {
   margin-bottom: 2em;
+  display: flex;
   label {
-    margin-right: 8px;
+    margin-right: 20px;
+    font-weight: bold;
   }
 
-  select {
-    border-radius: 5px 5px 0 0;
+  #filter {
+    border-radius: 5px;
+    padding: 5px;
     background-color: $primary-color;
     color: white;
-    padding: 1em;
     border: none;
+    width: 150px;
 
-    option {
-      background-color: $primary-color;
+    .select-input {
+      padding: 8px;
       border-bottom: white 1px solid;
     }
   }
-}
+} 

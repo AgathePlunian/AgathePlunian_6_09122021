@@ -22,11 +22,16 @@ class ViewIndex extends AbstractView {
   }
 
   //AFFICHAGE DES PHOTOGRAPHES PAR CARDS
-  renderIndex(listPhotograph, tagsList) {
-    this.renderTags(tagsList);
+  render() {
+    this.renderInfoPhotograph();
+    this.renderTags();
     this.animateTopButton();
+  } 
 
+  renderInfoPhotograph() {
+    let listPhotograph = this.getVariable("listPhotograph");
     let section = document.getElementById("photographers");
+    
     listPhotograph.forEach(photograph => {
       let str=""; 
       photograph.tags.forEach( tag => {
@@ -39,11 +44,12 @@ class ViewIndex extends AbstractView {
       div.innerHTML = '<a id="getID" href="photographer-page.html?id='+photograph.id+'"> <div class="portrait-container"><img src="./images/ID-Portrait/' + photograph.portrait + '"></div><h2 class="name">' + photograph.name + '</h2></a><p class="location">'+ photograph.country +'</p><p class="tagline">'+ photograph.tagline +'</p> <p class="price">'+ photograph.price + '€/jour</p> <ul class="tag-list" id="tagList">' + str + '</ul>';
       section.appendChild(div);    
     })
-  } 
+  }
 
   //AFFICHAGE DE LA LISTE DE TAGS NAVIGATION
-  renderTags(tagsList) {
-    var list = document.getElementById("tags-list");  
+  renderTags() {
+    let tagsList = this.getVariable("tagsList")
+    let list = document.getElementById("tags-list");  
     tagsList.forEach(tag => {
       let li = document.createElement("li");
       li.classList.add("tag", "first-list");
