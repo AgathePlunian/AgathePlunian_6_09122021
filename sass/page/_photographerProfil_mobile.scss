@@ -1,0 +1,63 @@
+@media screen and(max-width:767px){
+ 
+    #button-contact {
+        position: fixed;
+        bottom: 2em;
+        right: 29%;
+        padding: 0.5em 1em;
+        font-size: 1.1em;
+        
+    }
+
+    #photograph-info {
+        padding: 0;
+        background-color: white;
+        width: 100%;
+        margin-bottom: 1em;
+        
+        .portrait-container {
+            width: 125px;
+            height: 100px;          
+        }
+    }
+
+    .infoAndBtn {
+        width: 85%;
+        margin-right: 0;
+        overflow: hidden;
+       
+        .tag-list {
+            flex-flow: row wrap;
+        }
+    }
+
+    .input-select {
+        display: none;
+    }
+
+    #card-bottom {
+        display: none;
+    }
+
+
+    #media-section {
+        display: block;
+
+        .media-container {
+            height: fit-content;
+            margin-bottom: 0.5em;
+        }
+
+        .img-link {
+            width: 100%;
+            height: 190px;
+            align-items: center;
+
+            img {
+                width: 110%;
+
+            }
+        }
+    }
+
+}

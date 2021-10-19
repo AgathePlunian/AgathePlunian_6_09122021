@@ -1,0 +1,22 @@
+@media screen and(max-width:767px){
+
+    .lightbox-visible {
+        padding: 1em;
+    }
+    .img-lightbox-container {
+        width: 90%;
+        display: flex;
+        height: fit-content;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+    }
+
+    .fleche {
+        width: 10px;
+    }
+
+    #btn-close {
+        width: 10px;
+        right: 0;
+    }
+}

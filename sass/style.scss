@@ -4,11 +4,22 @@
 @import "./base/typography";
 
 @import "./page/index";
+@import "./page/index_tablet";
+@import "./page/index_mobile";
+
 @import "./page/photographerProfil";
+@import "./page/photographerProfil_tablet";
+@import "./page/photographerProfil_mobile";
+
 
 @import "./components/components";
 @import "./components/lightbox";
+@import "./components/lightbox_tablet";
+@import "./components/lightbox_mobile";
+
 @import "./components/modal-form";
+@import "./components/modal-form_mobile";
+
 
 
 

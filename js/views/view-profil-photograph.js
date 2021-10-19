@@ -1,6 +1,6 @@
 class ViewProfil extends AbstractView {
 
-  constructor(firstName) {
+  constructor() {
     super();
     this.mediasSorted = new Array();
   }
@@ -23,7 +23,7 @@ class ViewProfil extends AbstractView {
 
     cardBottom.innerHTML = `
       <div class="total-likes-container">
-        <p>${sumOfLikes}</p>
+        <p id="numberOfLikesBottomCard">${sumOfLikes}</p>
         <span class="card-bottom-heart-container">
           <img src="../images/icones/heart-solid.svg" alt="heart image"/>
         </span>
@@ -39,7 +39,7 @@ class ViewProfil extends AbstractView {
     let str="";
     let photograph = this.getVariable("photograph");
     photograph.tags.forEach( tag => {
-      str +='<li class = "tag">#' + tag + '</li>';  
+      str +='<a href="index.html?tag=' + tag +'" tabindex="0" class = "tag">#' + tag + '</a>';  
     });
 
     photographInfo.innerHTML =`
@@ -51,7 +51,7 @@ class ViewProfil extends AbstractView {
             <ul class="tag-list">${str}</ul>
           </div>
           <div>
-            <button class="btn-contact" id="button-contact">Contactez-moi</button>
+            <button tabindex="0" class="btn-contact" id="button-contact">Contactez-moi</button>
           </div>
         </div>
         <div class="portrait-container">
@@ -63,25 +63,29 @@ class ViewProfil extends AbstractView {
       // AJOUT EVENTLISTER ON CLICK BUTTON CONTACT
        let contactBtn = document.getElementById("button-contact");
        contactBtn.addEventListener('click', (event) => {
-         this.openModalContactForm(event, photograph);
+         this.openModalContactForm(photograph);
        })
      
   }
 
-  //FUNCTION ON CLICK BUTTON CONTACT
-  openModalContactForm(event) {
+  //FUNCTION ON CLICK BUTTON CONTACT        
+  openModalContactForm() {
     let photograph = this.getVariable("photograph");
     let formModalContainer = document.getElementById("form-modal-container");
+    let mainContent = document.getElementsByClassName("main-container")[0];
+    mainContent.setAttribute('aria-hidden', 'true');
+    mainContent.setAttribute('tabindex', '0');
+
     formModalContainer.classList.add("display-form-modal");
-    
+
     let formModal = document.createElement("div");
     formModal.classList.add("modal-form");
     formModalContainer.appendChild(formModal);
     formModal.innerHTML = `
     <div class="modal-form-header">
-      <h1 class="header-title-modal-form">Contactez-moi <br> ${photograph.name}</h1>
-      <span id="close-modal">
-        <img src="../images/icones/cross-white.svg" alt="close modal form"/>
+      <h1 tabindex='0' class="header-title-modal-form">Contactez-moi <br> ${photograph.name} </h1>
+      <span id="close-modal" tabindex="0">
+        <img src="../images/icones/cross-white.svg" alt="close modal form" role="button" tabindex="5"/>
       </span>
     </div>
     <form class="contact-form">
@@ -100,12 +104,19 @@ class ViewProfil extends AbstractView {
       <input type="submit" value="Envoyer" id="submit-contact-form-btn">
     </form>`;
 
-    //EVENT LISTENER BTN CLOSE MODAL
     let btnCloseModal = document.getElementById("close-modal");
+    btnCloseModal.focus();
+
+    //EVENT LISTENER BTN CLOSE MODAL
     btnCloseModal.addEventListener('click', (event) => {
       this.closeModalContactForm(event);
     })
-
+    btnCloseModal.addEventListener('keypress' , (event) => {
+      if(event.key === 'Enter'){
+        this.closeModalContactForm(event);
+      }
+    })
+  
     //EVENT LISTENER ON SUBMIT BTN
     let btnSubmit = document.getElementById("submit-contact-form-btn");
     btnSubmit.addEventListener('click', (event) => {
@@ -141,16 +152,116 @@ class ViewProfil extends AbstractView {
   renderInputSelect() {  
     let mediaSection = document.getElementById("photograph-pictures");
     mediaSection.innerHTML = `
-      <div class="input-select">
+      <div class="input-select-container">
         <label>Trier par</label>
-        <div role="listbox" id="filter">
-          <div class="select-input" role="option" value="popularité">Popularité<span><img/ src=""></span></div>
-          <div class="select-input" role="option" value="date">Date</div>
-          <div class="select-input" role="option" value="titre">Titre</div>
+        
+        <div role="button" id="filter" aria-haspopus="listbox" aria-expanded>
+          <div class="first-select-and-chevron">
+            <p id="first-input-select" class="select-input" tabindex="0">Popularité</p>
+            <span id="chevrons-container" tabindex="0" id="open-select">
+              <img class="chevron-down" src="../images/icones/chevron-down-solid.svg"/>
+              <img class="chevron-up" src="../images/icones/chevron-up-solid.svg"/>
+            </span>
+          </div>
+          <div tabindex="0" role="listbox" aria-activedescendant aria-selected id="second-input-select" class="select-input no-display-input-select">Date</div>
+          <div tabindex="0" role="listbox" aria-activedescendant aria-selected id="third-input-select" class="select-input no-display-input-select">Titre</div>
         </div>
       </div>
       <div id="media-section"></div>
       `;
+
+      let inputSelect = document.getElementById("chevrons-container");
+
+      inputSelect.addEventListener('click', () => {
+          this.handleSelect();
+      })
+
+      inputSelect.addEventListener('keypress' , (event) => {
+        if(event.key === 'Enter'){
+          this.handleSelect();
+        }
+      });
+  }
+
+  //FUNCTION OPEN SELECT
+  handleSelect() {
+    let chevronUp = document.getElementsByClassName("chevron-up")[0];
+    let inputPopularity = document.getElementById("first-input-select");
+    let inputDate = document.getElementById("second-input-select");
+    let inputTitle = document.getElementById("third-input-select");
+
+    //si le menu est ouvert
+    if(chevronUp.classList.contains("display-chevron")) {
+      this.closeMenuSelect();
+    }
+    else {
+      this.openMenuSelect();
+    }
+
+    inputPopularity.addEventListener('click', (event) => {
+      let valueSelected = "popularité";
+      this.filterMediasBySelect(valueSelected);
+      this.closeMenuSelect();
+    })
+
+    inputPopularity.addEventListener('keypress' , (event) => {
+      if(event.key === 'Enter'){
+        let valueSelected = "popularité";
+        this.filterMediasBySelect(valueSelected);
+        this.closeMenuSelect();
+      }
+     });
+
+    inputDate.addEventListener('click', (event) => {
+      let valueSelected = "date";
+      this.filterMediasBySelect(valueSelected);
+      this.closeMenuSelect();
+    })
+    inputDate.addEventListener('keypress' , (event) => {
+      if(event.key === 'Enter'){
+        let valueSelected = "date";
+        this.filterMediasBySelect(valueSelected);
+        this.closeMenuSelect();
+      }
+     });
+   
+    inputTitle.addEventListener('click', (event) => {
+      let valueSelected = "titre";
+      this.filterMediasBySelect(valueSelected);
+      this.closeMenuSelect();
+    })
+    inputTitle.addEventListener('keypress' , (event) => {
+      if(event.key === 'Enter'){
+        let valueSelected = "titre";
+        this.filterMediasBySelect(valueSelected);
+        this.closeMenuSelect();
+      }
+     });
+
+  }
+
+  openMenuSelect() {
+    let inputDate = document.getElementById("second-input-select");
+    let inputTitle = document.getElementById("third-input-select");
+
+    let chevronDown = document.getElementsByClassName("chevron-down")[0];
+    let chevronUp = document.getElementsByClassName("chevron-up")[0];
+    chevronDown.classList.add("no-display-chevron");
+    chevronUp.classList.add("display-chevron");
+    inputDate.classList.add("display-input-select");
+    inputTitle.classList.add("display-input-select");
+  }
+  
+  closeMenuSelect() {
+    let inputDate = document.getElementById("second-input-select");
+    let inputTitle = document.getElementById("third-input-select");
+
+    let chevronDown = document.getElementsByClassName("chevron-down")[0];
+    let chevronUp = document.getElementsByClassName("chevron-up")[0];
+    chevronDown.classList.remove("no-display-chevron");
+    chevronUp.classList.remove("display-chevron");
+    inputDate.classList.remove("display-input-select");
+    inputTitle.classList.remove("display-input-select");
   }
 
   //FUNCTION FILTER MEDIAS BY DEFAULT + ADD EVENT LISTENER ON FILTER BY
@@ -161,19 +272,12 @@ class ViewProfil extends AbstractView {
       return b.likes - a.likes;
     })
 
-      //AJOUT EVENT LISTENER ON CHANGE SELECT    
-      let filter = document.getElementById("filter");
-      filter.addEventListener('change', () => {
-        this.filterMediasBySelect();
-      })
       this.renderMedias();
   }
 
   /////FONCTION EVENTLISTER SELECT /////
 
-  filterMediasBySelect() {  
-
-    let valueSelected = filter.value;
+  filterMediasBySelect(valueSelected) {  
     
     if(valueSelected == "popularité") {
       this.mediasSorted = this.mediasSorted.sort(function(a,b) {
@@ -210,19 +314,19 @@ class ViewProfil extends AbstractView {
     let mediaSection = document.getElementById("media-section");
     let firstName = this.getVariable("firstName");
     mediaSection.innerHTML = "";
-    
+      
     this.mediasSorted.forEach(media => {
       let divContainer = document.createElement('div');
       divContainer.classList.add("media-container");
         divContainer.innerHTML = `
-          <div class="img-link" id="${media.id}">
+          <div class="img-link" id="${media.id}" alt="${media.title} ,closeup view" tabindex="0">
           ${this.tagMediaFactory(media, firstName)}
           </div>
           <div class="title-container">
             <p class="media-title">${media.title}</p>
             <div class="likes-container">
               <p class="likes-number">${media.likes}</p>
-              <i class="empty-heart far fa-heart">
+              <i class="empty-heart far fa-heart" tabindex="0" role="button">
               <i class="full-heart fas fa-heart"></i>
               </i>
             </div>
@@ -235,15 +339,37 @@ class ViewProfil extends AbstractView {
     let hearts = document.getElementsByClassName("empty-heart");
     for(var i = 0 ; i < hearts.length ; i++) {
       hearts[i].addEventListener ('click' , (event) => {
-        this.addLike(event);
-      })
+        let paragraphNumberOfLikes = event.path[2].childNodes[1];
+        let fullHeart = event.target;
+        this.addLike(paragraphNumberOfLikes, fullHeart);
+      });
+     
+      hearts[i].addEventListener('keypress' , (event) => {
+        if(event.key === 'Enter'){
+          let fullHeart = event.target.children[0];
+          let paragraphNumberOfLikes = event.path[1].childNodes[1];
+          this.addLike(paragraphNumberOfLikes,fullHeart);
+        }
+      });
     }
 
     //AJOUT EVENT LISTENER SUR IMAGE 
     let listImages = document.getElementsByClassName("img-link");
+    
     for(var i = 0 ; i < listImages.length ; i++) {
-      listImages[i].addEventListener ('click' , (event) => {
-        this.showLightbox(event);
+            
+      listImages[i].addEventListener ('click' , (event) => {    
+        let idMedia = event.path[1].getAttribute("id");
+        this.showLightbox(event, idMedia);
+      })
+
+      listImages[i].addEventListener ('keypress', (event) => {
+        if(event.key === 'Enter'){
+         
+          let idMedia = event.path[0].getAttribute("id");
+          this.showLightbox(event, idMedia);
+        }
+       
       })
     } 
   }
@@ -262,27 +388,33 @@ class ViewProfil extends AbstractView {
   }
 
   //FUNCTION ONCLICK IMAGE
-  showLightbox(event) {
-    let idMedia = event.path[1].getAttribute("id");
+  showLightbox(event, idMedia) {
     let lightbox = new Lightbox("lightbox", this.mediasSorted, idMedia, this.getVariable("firstName"));
     lightbox.show();
   }
     
   //FUNCTION ONCLICK ADD OR REMOVE LIKE
-  addLike(event) {  
-    let fullHeart = event.target; 
-    let paragraphNumberOfLikes = event.path[2].childNodes[1];
+  addLike(paragraphNumberOfLikes, fullHeart) {  
     let numberOfLikes = paragraphNumberOfLikes.textContent; 
+    let paragraphNumberOfLikeBottom = document.getElementById("numberOfLikesBottomCard");
+    let numberOfLikesCardBottom = document.getElementById("numberOfLikesBottomCard").textContent;
+    let numberOfLikeCardToNumber = Number(numberOfLikesCardBottom);
     let numberLikeToNumber = Number(numberOfLikes);
     
     if (fullHeart.classList.contains('liked')) {
       fullHeart.classList.remove('liked');
       let removeLike = numberLikeToNumber - 1;
+      let removeLikeBottom = numberOfLikeCardToNumber - 1;
+      
+      paragraphNumberOfLikeBottom.innerHTML = removeLikeBottom;
       paragraphNumberOfLikes.innerHTML = removeLike;
     }
     else {
       fullHeart.classList.add('liked');
       let addLike = numberLikeToNumber + 1;
+      let addLikeBottom = numberOfLikeCardToNumber + 1;
+
+      paragraphNumberOfLikeBottom.innerHTML = addLikeBottom;
       paragraphNumberOfLikes.innerHTML = addLike;
     }
   }

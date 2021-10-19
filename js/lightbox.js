@@ -13,6 +13,9 @@ class Lightbox {
     this.indexOfMedia = this.listMedias.findIndex(media => media.id == this.idMedia);
     
     let mainContainer = document.getElementsByClassName("main-container")[0];
+    let cardBottom = document.getElementById("card-bottom");
+    cardBottom.classList.add("card-bottom-display-none");
+
     mainContainer.classList.add("main-container-hidden");
     this.target.classList.add("lightbox-visible");
         
@@ -28,17 +31,17 @@ class Lightbox {
 
     lightboxContent.innerHTML = 
     `<div class="lightbox-container">
-        <span id="btn-close">
-        <img src="../images/icones/cross.svg" alt="close lightbox"/>
+        <span id="btn-close" tabindex="0" role="button">
+        <img src="../images/icones/cross.svg" alt="close dialog"/>
         </span>
         <div class="fleche-et-img">
-          <span class="fleche" id="previous-img">
+          <span class="fleche" id="previous-img" tabindex="0" role="button">
             <img src="../images/icones/chevron-left-solid.svg" alt="previous image" />
           </span>
           <div class="img-lightbox-container">
           ${this.tagMediaFactory(this.listMedias[this.indexOfMedia], this.firstName)}
           </div>
-          <span class="fleche" id="next-img">
+          <span class="fleche" id="next-img" tabindex="0" role="button">
           <img src="../images/icones/chevron-right-solid.svg" alt="next image" />
           </soan>
         <div>
@@ -53,11 +56,23 @@ class Lightbox {
     this.closeLightbox(event)
     });
 
+    btnClose.addEventListener('keypress' , (event) => {
+        if(event.key === 'Enter'){
+        this.closeLightbox(event)
+        }
+      });
+
     //ADD EVENT TO RIGHT ARROW
     let rightArrow = document.getElementById("next-img");
     rightArrow.addEventListener('click' , (event) => {
       this.showNextImg()
     })
+
+    rightArrow.addEventListener('keypress' , (event) => {
+      if(event.key === 'Enter'){
+      this.showNextImg()
+      }
+    });
 
    //ADD EVENT TO LEFT ARROW
     let leftArrow = document.getElementById("previous-img");
@@ -65,13 +80,19 @@ class Lightbox {
       this.showPreviousImg()
     })
 
+    leftArrow.addEventListener('keypress' , (event) => {
+      if(event.key === 'Enter'){
+      this.showPreviousImg()
+      }
+    });
+
     document.addEventListener('keydown', (event) => {
       this.checkKey(event)
     })
   }
          
   checkKey(event) {
-    console.log(event);
+  
     event = event || window.event;
 
     if (event.keyCode == '37') {
@@ -79,6 +100,10 @@ class Lightbox {
     }
     if (event.keyCode == '39') {
         this.showPreviousImg();
+    }
+
+    if(event.keyCode == '27') {
+      this.closeLightbox(event);
     }
 }
 
@@ -100,7 +125,9 @@ class Lightbox {
   closeLightbox(event) {
     let mainContainer = document.getElementsByClassName("main-container")[0];
     let lightbox = document.getElementsByClassName("lightbox-visible")[0];
-
+    let cardBottom = document.getElementById("card-bottom");
+   
+    cardBottom.classList.remove("card-bottom-display-none");
     mainContainer.classList.remove("main-container-hidden");
     lightbox.classList.remove("lightbox-visible");
     lightbox.innerHTML = "";

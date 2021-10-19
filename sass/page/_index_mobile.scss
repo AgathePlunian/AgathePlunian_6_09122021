@@ -1,0 +1,42 @@
+@media screen and(max-width:767px){
+    .nav-items {
+        flex-flow: row wrap;
+    }
+
+    .logo {
+        order: 1;
+        width: 140px;
+    }
+
+    #tags-list {
+        margin-top: 2em;
+        order: 3;
+        width: 100%;
+        flex-flow : wrap;
+        justify-content: center;
+        
+        .tag {
+            margin-bottom: 0.5em;
+            
+        }
+    }
+
+    .item-photographer{
+        order: 2;
+        font-size: 1em;
+        
+    }
+
+    #photographers {
+        flex-flow: column;
+        align-items: center;
+    }
+
+    .artist-card {
+        width: 100%;
+    }
+
+    .link-contain {
+        right: 28%;
+    }
+}

@@ -1,0 +1,19 @@
+@media screen and(max-width:1024px){
+
+    .lightbox-visible {
+        padding: 1em;
+        z-index: 1000;
+    }
+
+    .fleche-et-img {
+        width: 100%;
+        margin: auto;
+    }
+    .img-lightbox-container {
+        display: flex;
+        height: fit-content;
+       margin-right: 2em;
+       margin-left: 2em;
+    }
+
+}

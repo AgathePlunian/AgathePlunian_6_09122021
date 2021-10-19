@@ -26,6 +26,7 @@ class ViewIndex extends AbstractView {
     this.renderInfoPhotograph();
     this.renderTags();
     this.animateTopButton();
+    this.getTagInURL();
   } 
 
   renderInfoPhotograph() {
@@ -41,7 +42,17 @@ class ViewIndex extends AbstractView {
 
       let div = document.createElement("div");
       div.classList.add("artist-card");
-      div.innerHTML = '<a id="getID" href="photographer-page.html?id='+photograph.id+'"> <div class="portrait-container"><img src="./images/ID-Portrait/' + photograph.portrait + '"></div><h2 class="name">' + photograph.name + '</h2></a><p class="location">'+ photograph.country +'</p><p class="tagline">'+ photograph.tagline +'</p> <p class="price">'+ photograph.price + '€/jour</p> <ul class="tag-list" id="tagList">' + str + '</ul>';
+      div.innerHTML = `
+        <a id="getID" href="photographer-page.html?id=${photograph.id}"> 
+        <div class="portrait-container">
+          <img src="./images/ID-Portrait/${photograph.portrait}">
+        </div>
+        <h2 class="name">${photograph.name}</h2>
+        </a>
+          <p class="location">${photograph.country}</p>
+          <p class="tagline">${photograph.tagline}</p> 
+          <p class="price">${photograph.price} €/jour</p> 
+          <ul class="tag-list" id="tagList">${str}</ul>`;
       section.appendChild(div);    
     })
   }
@@ -53,18 +64,37 @@ class ViewIndex extends AbstractView {
     tagsList.forEach(tag => {
       let li = document.createElement("li");
       li.classList.add("tag", "first-list");
+      li.setAttribute("tabindex", "0");
+      li.setAttribute("role", "link");
+      li.setAttribute("id", tag);
       li.innerHTML = "#" + tag;
       list.appendChild(li);
       li.addEventListener('click', (event) => {
         this.filterPhotographByTags(event)
       })
+      li.addEventListener('keypress', (event) => {
+        if(event.key === 'Enter'){
+          this.filterPhotographByTags(event)
+          }
+      })
     });
   }
 
+  getTagInURL() {
+    let tagURL = this.getVariable("tagURL");
+    console.log(tagURL);
+    if(tagURL != "null") {
+    
+      let tagSelected = document.getElementById(tagURL);
+      console.log(tagSelected);
+      tagSelected.click();
+    }
+  }
+  
   //EVENT ON CLICK DES TAGS SELECTIONNÉS
   filterPhotographByTags(event) {
-    var tagSelected = event.target;
-    var contentTag = tagSelected.textContent;
+    let tagSelected = event.target;
+    let contentTag = tagSelected.textContent;
     let listPhotograph = document.getElementsByClassName("artist-card");
     
     // SUPPRIMER CLASS SELECTED SI LE TAG EST DÉJÀ SELECTIONNÉ

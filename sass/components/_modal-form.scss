@@ -8,6 +8,9 @@
     right: 0;
     left: 0;
     background-color: rgba(255, 255, 255, 0.507);
+    overflow: scroll;
+    z-index: 1001;
+
 }
 
 .modal-form-header {
@@ -19,6 +22,9 @@
     background-color: $background-modal;
     width: 420px;
     border-radius: 5px;
+    overflow: scroll;
+    z-index: 1002;
+
 }
 
 #close-modal {
@@ -34,20 +40,22 @@
     flex-flow: column;
 
     label {
-        margin-bottom: 0.2em;
+        font-size: 1.2em;
+        margin-bottom: 0.4em;
     }
 
     input {
         border-radius: 5px;
         border: none;
         padding: 0.5em;
-        margin-bottom: 0.5em;
+        height: 40px;
+        margin-bottom: 0.8em;
     }
 
     .area-message {
         border-radius: 5px;
         resize: none;
-        padding: 0.5sem;
+        padding: 0.5em;
         height: 100px;
         margin-bottom: 1em;
         border: none;
@@ -58,7 +66,8 @@
 #submit-contact-form-btn {
     background-color: $primary-color;
     color: white;
-    padding: 1em 2em;
-    width: fit-content;
     border-radius: 5px;
+    font-size: 1.1em;
+    width: 150px;
+    height: 60px;
 }

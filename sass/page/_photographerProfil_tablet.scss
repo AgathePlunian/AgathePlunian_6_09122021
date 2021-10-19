@@ -1,0 +1,38 @@
+@media screen and (max-width:1024px) {
+
+  #media-section {
+    grid-template-columns: repeat(auto-fill, 48%); 
+  }
+  
+  .media-container {
+    height: 350px;
+    overflow: hidden;
+    margin-bottom: 2em;
+    
+    
+    .media-title {
+      color: $primary-color;
+      font-size: 1.1em;
+    }
+  
+    .img-link {
+      border-radius: 5px;
+      overflow: hidden;
+      height: 300px;
+      margin-bottom:0.5em;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      img{
+       object-fit: cover;
+       width: 160%;
+      }
+      video {
+        width: 100%;
+      }
+    }
+  }
+  
+}
