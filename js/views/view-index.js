@@ -82,11 +82,9 @@ class ViewIndex extends AbstractView {
 
   getTagInURL() {
     let tagURL = this.getVariable("tagURL");
-    console.log(tagURL);
     if(tagURL != "null") {
     
       let tagSelected = document.getElementById(tagURL);
-      console.log(tagSelected);
       tagSelected.click();
     }
   }

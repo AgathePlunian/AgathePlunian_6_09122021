@@ -157,14 +157,14 @@ class ViewProfil extends AbstractView {
         
         <div role="button" id="filter" aria-haspopus="listbox" aria-expanded>
           <div class="first-select-and-chevron">
-            <p id="first-input-select" class="select-input" tabindex="0">Popularité</p>
-            <span id="chevrons-container" tabindex="0" id="open-select">
+            <p id="first-input-select" class="select-input" tabindex="0" role="listbox"  aria-activedescendant aria-selected>Popularité</p>
+            <span id="chevrons-container" tabindex="0" id="open-select" role="button" aria-haspopup="listbox" aria-expanded>
               <img class="chevron-down" src="../images/icones/chevron-down-solid.svg"/>
               <img class="chevron-up" src="../images/icones/chevron-up-solid.svg"/>
             </span>
           </div>
-          <div tabindex="0" role="listbox" aria-activedescendant aria-selected id="second-input-select" class="select-input no-display-input-select">Date</div>
-          <div tabindex="0" role="listbox" aria-activedescendant aria-selected id="third-input-select" class="select-input no-display-input-select">Titre</div>
+          <p tabindex="0" role="listbox" aria-activedescendant aria-selected id="second-input-select" class="select-input no-display-input-select">Date</p>
+          <p tabindex="0" role="listbox" aria-activedescendant aria-selected id="third-input-select" class="select-input no-display-input-select">Titre</p>
         </div>
       </div>
       <div id="media-section"></div>
@@ -181,15 +181,35 @@ class ViewProfil extends AbstractView {
           this.handleSelect();
         }
       });
+
+      let firstInput = document.getElementById("first-input-select");
+      let secondInput = document.getElementById("second-input-select");
+      let thirdInput = document.getElementById("third-input-select");
+  
+      let selectChoices = [firstInput, secondInput, thirdInput];
+      console.log(selectChoices);
+  
+      for (let i = 1; i < selectChoices.length; i++) {
+        
+        selectChoices[i].addEventListener('click', (event) => {
+          let contentFirstInput = firstInput.textContent;
+          
+          let inputSelected = event.target;
+          let valueSelected = event.target.innerHTML;
+                    
+          this.filterMediasBySelect(valueSelected);
+          this.closeMenuSelect();
+
+          firstInput.innerHTML = valueSelected;      
+          inputSelected.innerHTML = contentFirstInput;
+        })
+      }
   }
 
   //FUNCTION OPEN SELECT
   handleSelect() {
     let chevronUp = document.getElementsByClassName("chevron-up")[0];
-    let inputPopularity = document.getElementById("first-input-select");
-    let inputDate = document.getElementById("second-input-select");
-    let inputTitle = document.getElementById("third-input-select");
-
+   
     //si le menu est ouvert
     if(chevronUp.classList.contains("display-chevron")) {
       this.closeMenuSelect();
@@ -198,52 +218,11 @@ class ViewProfil extends AbstractView {
       this.openMenuSelect();
     }
 
-    inputPopularity.addEventListener('click', (event) => {
-      let valueSelected = "popularité";
-      this.filterMediasBySelect(valueSelected);
-      this.closeMenuSelect();
-    })
-
-    inputPopularity.addEventListener('keypress' , (event) => {
-      if(event.key === 'Enter'){
-        let valueSelected = "popularité";
-        this.filterMediasBySelect(valueSelected);
-        this.closeMenuSelect();
-      }
-     });
-
-    inputDate.addEventListener('click', (event) => {
-      let valueSelected = "date";
-      this.filterMediasBySelect(valueSelected);
-      this.closeMenuSelect();
-    })
-    inputDate.addEventListener('keypress' , (event) => {
-      if(event.key === 'Enter'){
-        let valueSelected = "date";
-        this.filterMediasBySelect(valueSelected);
-        this.closeMenuSelect();
-      }
-     });
-   
-    inputTitle.addEventListener('click', (event) => {
-      let valueSelected = "titre";
-      this.filterMediasBySelect(valueSelected);
-      this.closeMenuSelect();
-    })
-    inputTitle.addEventListener('keypress' , (event) => {
-      if(event.key === 'Enter'){
-        let valueSelected = "titre";
-        this.filterMediasBySelect(valueSelected);
-        this.closeMenuSelect();
-      }
-     });
-
   }
 
   openMenuSelect() {
     let inputDate = document.getElementById("second-input-select");
     let inputTitle = document.getElementById("third-input-select");
-
     let chevronDown = document.getElementsByClassName("chevron-down")[0];
     let chevronUp = document.getElementsByClassName("chevron-up")[0];
     chevronDown.classList.add("no-display-chevron");
@@ -255,7 +234,6 @@ class ViewProfil extends AbstractView {
   closeMenuSelect() {
     let inputDate = document.getElementById("second-input-select");
     let inputTitle = document.getElementById("third-input-select");
-
     let chevronDown = document.getElementsByClassName("chevron-down")[0];
     let chevronUp = document.getElementsByClassName("chevron-up")[0];
     chevronDown.classList.remove("no-display-chevron");
@@ -279,21 +257,21 @@ class ViewProfil extends AbstractView {
 
   filterMediasBySelect(valueSelected) {  
     
-    if(valueSelected == "popularité") {
+    if(valueSelected == "Popularité") {
       this.mediasSorted = this.mediasSorted.sort(function(a,b) {
         return b.likes - a.likes;
       })
 
     }
 
-    else if(valueSelected == "date") {
+    else if(valueSelected == "Date") {
       this.mediasSorted = this.mediasSorted.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
   
     }
 
-    else if(valueSelected == "titre") {   
+    else if(valueSelected == "Titre") {   
       this.mediasSorted = this.mediasSorted.sort(function (a, b) {
         var titreA = a.title.toUpperCase(); 
         var titreB = b.title.toUpperCase(); 
@@ -326,7 +304,7 @@ class ViewProfil extends AbstractView {
             <p class="media-title">${media.title}</p>
             <div class="likes-container">
               <p class="likes-number">${media.likes}</p>
-              <i class="empty-heart far fa-heart" tabindex="0" role="button">
+              <i class="empty-heart far fa-heart" tabindex="0" role="button" aria-label="likes">
               <i class="full-heart fas fa-heart"></i>
               </i>
             </div>
