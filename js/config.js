@@ -1,1 +1,1 @@
-const URL_DATA = '/dataPhotographers.json';
+const URL_DATA = './dataPhotographers.json';

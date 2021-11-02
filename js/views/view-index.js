@@ -45,7 +45,7 @@ class ViewIndex extends AbstractView {
       div.innerHTML = `
         <a id="getID" href="photographer-page.html?id=${photograph.id}"> 
         <div class="portrait-container">
-          <img src="./images/ID-Portrait/${photograph.portrait}">
+          <img src="./images/ID-Portrait/${photograph.portrait}" alt="portrait de ${photograph.name}"/>
         </div>
         <h2 class="name">${photograph.name}</h2>
         </a>
@@ -65,7 +65,6 @@ class ViewIndex extends AbstractView {
       let li = document.createElement("li");
       li.classList.add("tag", "first-list");
       li.setAttribute("tabindex", "0");
-      li.setAttribute("role", "link");
       li.setAttribute("id", tag);
       li.innerHTML = "#" + tag;
       list.appendChild(li);

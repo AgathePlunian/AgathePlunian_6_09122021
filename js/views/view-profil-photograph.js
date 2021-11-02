@@ -55,7 +55,7 @@ class ViewProfil extends AbstractView {
           </div>
         </div>
         <div class="portrait-container">
-          <img src="./images/ID-Portrait/${photograph.portrait}"></div>`;
+          <img src="./images/ID-Portrait/${photograph.portrait}" alt="portrait de ${photograph.name}"/></div>`;
      
     
     this.renderInputSelect();
@@ -73,7 +73,6 @@ class ViewProfil extends AbstractView {
     let photograph = this.getVariable("photograph");
     let formModalContainer = document.getElementById("form-modal-container");
     let mainContent = document.getElementsByClassName("main-container")[0];
-    mainContent.setAttribute('aria-hidden', 'true');
     mainContent.setAttribute('tabindex', '0');
 
     formModalContainer.classList.add("display-form-modal");
@@ -84,7 +83,7 @@ class ViewProfil extends AbstractView {
     formModal.innerHTML = `
     <div class="modal-form-header">
       <h1 tabindex='0' class="header-title-modal-form">Contactez-moi <br> ${photograph.name} </h1>
-      <span id="close-modal" tabindex="0">
+      <span id="close-modal" tabindex="0" aria-label="close modal">
         <img src="../images/icones/cross-white.svg" alt="close modal form" role="button" tabindex="5"/>
       </span>
     </div>
@@ -155,16 +154,16 @@ class ViewProfil extends AbstractView {
       <div class="input-select-container">
         <label>Trier par</label>
         
-        <div role="button" id="filter" aria-haspopus="listbox" aria-expanded>
+        <div role="button" id="filter">
           <div class="first-select-and-chevron">
-            <p id="first-input-select" class="select-input" tabindex="0" role="listbox"  aria-activedescendant aria-selected>Popularité</p>
-            <span id="chevrons-container" tabindex="0" id="open-select" role="button" aria-haspopup="listbox" aria-expanded>
-              <img class="chevron-down" src="../images/icones/chevron-down-solid.svg"/>
-              <img class="chevron-up" src="../images/icones/chevron-up-solid.svg"/>
+            <p id="first-input-select" class="select-input" tabindex="0"">Popularité</p>
+            <span id="chevrons-container" tabindex="0" id="open-select" role="button" aria-label="Open filter by" aria-haspopup="true">
+              <img class="chevron-down" src="../images/icones/chevron-down-solid.svg" alt="close select"/>
+              <img class="chevron-up" src="../images/icones/chevron-up-solid.svg" alt="open select"/>
             </span>
           </div>
-          <p tabindex="0" role="listbox" aria-activedescendant aria-selected id="second-input-select" class="select-input no-display-input-select">Date</p>
-          <p tabindex="0" role="listbox" aria-activedescendant aria-selected id="third-input-select" class="select-input no-display-input-select">Titre</p>
+          <p tabindex="0"  id="second-input-select" class="select-input no-display-input-select">Date</p>
+          <p tabindex="0"  id="third-input-select" class="select-input no-display-input-select">Titre</p>
         </div>
       </div>
       <div id="media-section"></div>
@@ -297,7 +296,7 @@ class ViewProfil extends AbstractView {
       let divContainer = document.createElement('div');
       divContainer.classList.add("media-container");
         divContainer.innerHTML = `
-          <div class="img-link" id="${media.id}" alt="${media.title} ,closeup view" tabindex="0">
+          <div class="img-link" id="${media.id}" aria-label="${media.title} ,closeup view" tabindex="0">
           ${this.tagMediaFactory(media, firstName)}
           </div>
           <div class="title-container">
@@ -357,11 +356,11 @@ class ViewProfil extends AbstractView {
     let firstName =  this.getVariable("firstName");
     if(media.video) {
       return `<video controls>
-                  <source src="images/${firstName}/${media.video}" type="video/mp4">
+                  <source src="images/${firstName}/${media.video}" type="video/mp4" alt="${media.title}, closeup viex">
                 </video>`
     }
     else {
-      return `<img src="images/${firstName}/${media.image}"/>`
+      return `<img src="images/${firstName}/${media.image}" alt="${media.title} closeup view"/>`
     }
   }
 

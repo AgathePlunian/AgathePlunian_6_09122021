@@ -3,9 +3,7 @@ class Controller {
    async showIndex() {
     let listPhotograph = await Model.getPhotographers();
     let tagsList = await Model.getTags();
-    let queryString = window.location.search;
-    let urlParams = new URLSearchParams(queryString);
-    let tagParam = urlParams.get("tag");
+    let tagParam  = Utils.getParameter('tag');
     let view = ViewFactory.getView("index");
     view.addVariable("listPhotograph", listPhotograph);
     view.addVariable("tagsList", tagsList);
