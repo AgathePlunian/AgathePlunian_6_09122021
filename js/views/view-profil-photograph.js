@@ -25,7 +25,7 @@ class ViewProfil extends AbstractView {
       <div class="total-likes-container">
         <p id="numberOfLikesBottomCard">${sumOfLikes}</p>
         <span class="card-bottom-heart-container">
-          <img src="../images/icones/heart-solid.svg" alt="heart image"/>
+          <img src="./images/icones/heart-solid.svg" alt="heart image"/>
         </span>
       </div>
       <div>
@@ -84,7 +84,7 @@ class ViewProfil extends AbstractView {
     <div class="modal-form-header">
       <h1 tabindex='0' class="header-title-modal-form">Contactez-moi <br> ${photograph.name} </h1>
       <span id="close-modal" tabindex="0" aria-label="close modal">
-        <img src="../images/icones/cross-white.svg" alt="close modal form" role="button" tabindex="5"/>
+        <img src="./images/icones/cross-white.svg" alt="close modal form" role="button" tabindex="5"/>
       </span>
     </div>
     <form class="contact-form">
