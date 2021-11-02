@@ -158,8 +158,8 @@ class ViewProfil extends AbstractView {
           <div class="first-select-and-chevron">
             <p id="first-input-select" class="select-input" tabindex="0"">Popularité</p>
             <span id="chevrons-container" tabindex="0" id="open-select" role="button" aria-label="Open filter by" aria-haspopup="true">
-              <img class="chevron-down" src="../images/icones/chevron-down-solid.svg" alt="close select"/>
-              <img class="chevron-up" src="../images/icones/chevron-up-solid.svg" alt="open select"/>
+              <img class="chevron-down" src="./images/icones/chevron-down-solid.svg" alt="close select"/>
+              <img class="chevron-up" src="./images/icones/chevron-up-solid.svg" alt="open select"/>
             </span>
           </div>
           <p tabindex="0"  id="second-input-select" class="select-input no-display-input-select">Date</p>
