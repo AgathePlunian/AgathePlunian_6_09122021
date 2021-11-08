@@ -72,13 +72,15 @@ class ViewProfil extends AbstractView {
   openModalContactForm() {
     let photograph = this.getVariable("photograph");
     let formModalContainer = document.getElementById("form-modal-container");
-    let mainContent = document.getElementsByClassName("main-container")[0];
-    mainContent.setAttribute('tabindex', '0');
+    let mainContent = document.getElementsByClassName("main")[0];
+    mainContent.setAttribute('aria-hidden', 'true');
+    formModalContainer.setAttribute("aria-modal" ,"true");
 
     formModalContainer.classList.add("display-form-modal");
 
     let formModal = document.createElement("div");
     formModal.classList.add("modal-form");
+    
     formModalContainer.appendChild(formModal);
     formModal.innerHTML = `
     <div class="modal-form-header">
@@ -123,6 +125,18 @@ class ViewProfil extends AbstractView {
     })
   }
 
+  //FUNCTION ON CLICK CLOSE MODAL
+  closeModalContactForm(event) {
+    let mainContent = document.getElementsByClassName("main")[0];
+    let modalForm = document.getElementById("form-modal-container");
+    mainContent.setAttribute('aria-hidden', 'true');
+    modalForm.classList.remove("display-form-modal");
+    modalForm.innerHTML="";
+    
+  }
+
+
+
   //FUNCTION ON CLICK SUBMIT CONTACT FORM
   onSubmitContactForm(event) {
     event.preventDefault();
@@ -139,13 +153,6 @@ class ViewProfil extends AbstractView {
 
   }
 
-  //FUNCTION ON CLICK CLOSE MODAL
-  closeModalContactForm(event) {
-    let modalForm = document.getElementById("form-modal-container");
-    modalForm.classList.remove("display-form-modal");
-    modalForm.innerHTML="";
-    
-  }
 
   //AFFICHAGE DE L'INPUT DE SELECTION DE TRI DES MÉDIAS   
   renderInputSelect() {  
