@@ -163,14 +163,14 @@ class ViewProfil extends AbstractView {
         
         <div role="button" id="filter">
           <div class="first-select-and-chevron">
-            <p id="first-input-select" class="select-input" tabindex="0"">Popularité</p>
+            <p id="first-input-select" class="select-input" tabindex="0" aria-label="filtrer par popularité">Popularité</p>
             <span id="chevrons-container" tabindex="0" id="open-select" role="button" aria-label="Open filter by" aria-haspopup="true">
               <img class="chevron-down" src="./images/icones/chevron-down-solid.svg" alt="close select"/>
               <img class="chevron-up" src="./images/icones/chevron-up-solid.svg" alt="open select"/>
             </span>
           </div>
-          <p tabindex="0"  id="second-input-select" class="select-input no-display-input-select">Date</p>
-          <p tabindex="0"  id="third-input-select" class="select-input no-display-input-select">Titre</p>
+          <p tabindex="0" aria-label="filtrer par date" id="second-input-select" class="select-input no-display-input-select">Date</p>
+          <p tabindex="0" aria-label="filtrer par titre" id="third-input-select" class="select-input no-display-input-select">Titre</p>
         </div>
       </div>
       <div id="media-section"></div>
