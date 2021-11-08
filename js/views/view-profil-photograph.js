@@ -164,7 +164,7 @@ class ViewProfil extends AbstractView {
         <div role="button" id="filter">
           <div class="first-select-and-chevron">
             <p id="first-input-select" class="select-input" tabindex="0" aria-label="filtrer par popularité">Popularité</p>
-            <span id="chevrons-container" tabindex="0" id="open-select" role="button" aria-label="Open filter by" aria-haspopup="true">
+            <span id="chevrons-container" tabindex="0" id="open-select" aria-label="Ouvrir menu filtrer par" aria-haspopup="true" role="listbox">
               <img class="chevron-down" src="./images/icones/chevron-down-solid.svg" alt="close select"/>
               <img class="chevron-up" src="./images/icones/chevron-up-solid.svg" alt="open select"/>
             </span>
@@ -231,13 +231,16 @@ class ViewProfil extends AbstractView {
     let inputTitle = document.getElementById("third-input-select");
     let chevronDown = document.getElementsByClassName("chevron-down")[0];
     let chevronUp = document.getElementsByClassName("chevron-up")[0];
+    let inputSelect = document.getElementById("chevrons-container");
     chevronDown.classList.add("no-display-chevron");
     chevronUp.classList.add("display-chevron");
     inputDate.classList.add("display-input-select");
     inputTitle.classList.add("display-input-select");
+    inputSelect.setAttribute("aria-label","Fermer menu filtrer par")
   }
   
   closeMenuSelect() {
+    let inputSelect = document.getElementById("chevrons-container");
     let inputDate = document.getElementById("second-input-select");
     let inputTitle = document.getElementById("third-input-select");
     let chevronDown = document.getElementsByClassName("chevron-down")[0];
@@ -246,6 +249,8 @@ class ViewProfil extends AbstractView {
     chevronUp.classList.remove("display-chevron");
     inputDate.classList.remove("display-input-select");
     inputTitle.classList.remove("display-input-select");
+    inputSelect.setAttribute("aria-label","Ouvrir menu filtrer par")
+
   }
 
   //FUNCTION FILTER MEDIAS BY DEFAULT + ADD EVENT LISTENER ON FILTER BY
