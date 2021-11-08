@@ -367,7 +367,7 @@ class ViewProfil extends AbstractView {
                 </video>`
     }
     else {
-      return `<img src="images/${firstName}/${media.image}" alt="${media.title} closeup view"/>`
+      return `<img src="./images/${firstName}/${media.image}" alt="${media.title} closeup view"/>`
     }
   }
 

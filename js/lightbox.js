@@ -32,17 +32,17 @@ class Lightbox {
     lightboxContent.innerHTML = 
     `<div class="lightbox-container">
         <span id="btn-close" tabindex="0" role="button">
-        <img src="../images/icones/cross.svg" alt="close dialog"/>
+        <img src="./images/icones/cross.svg" alt="close dialog"/>
         </span>
         <div class="fleche-et-img">
           <span class="fleche" id="previous-img" tabindex="0" role="button">
-            <img src="../images/icones/chevron-left-solid.svg" alt="previous image" />
+            <img src="./images/icones/chevron-left-solid.svg" alt="previous image" />
           </span>
           <div class="img-lightbox-container">
           ${this.tagMediaFactory(this.listMedias[this.indexOfMedia], this.firstName)}
           </div>
           <span class="fleche" id="next-img" tabindex="0" role="button">
-          <img src="../images/icones/chevron-right-solid.svg" alt="next image" />
+          <img src="./images/icones/chevron-right-solid.svg" alt="next image" />
           </soan>
         <div>
         <p class="lightbox-title">
@@ -117,7 +117,7 @@ class Lightbox {
       
     }
     else {
-      return `<img src="images/${firstName}/${media.image}"/>`
+      return `<img src="./images/${firstName}/${media.image}"/>`
     }
   }
   
