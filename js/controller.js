@@ -8,7 +8,7 @@ class Controller {
     view.addVariable("listPhotograph", listPhotograph);
     view.addVariable("tagsList", tagsList);
     view.addVariable("tagURL" , tagParam);
-    view.render(listPhotograph);  
+    view.render();  
   }
 
    async showPhotographer() {
