@@ -406,6 +406,8 @@ class ViewProfil extends AbstractView {
     
     if (fullHeart.classList.contains('liked')) {
       fullHeart.classList.remove('liked');
+      fullHeart.parentNode.setAttribute("aria-label", "like");
+
       let removeLike = numberLikeToNumber - 1;
       let removeLikeBottom = numberOfLikeCardToNumber - 1;
       
@@ -414,6 +416,7 @@ class ViewProfil extends AbstractView {
     }
     else {
       fullHeart.classList.add('liked');
+      fullHeart.parentNode.setAttribute("aria-label", "dislike");
       let addLike = numberLikeToNumber + 1;
       let addLikeBottom = numberOfLikeCardToNumber + 1;
 
