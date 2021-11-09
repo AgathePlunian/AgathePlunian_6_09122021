@@ -329,7 +329,7 @@ class ViewProfil extends AbstractView {
             <p class="media-title">${media.title}</p>
             <div class="likes-container">
               <p class="likes-number">${media.likes}</p>
-              <i class="empty-heart far fa-heart" tabindex="0" role="button" aria-label="likes">
+              <i class="empty-heart far fa-heart" tabindex="0" role="button" aria-label="like">
               <i class="full-heart fas fa-heart"></i>
               </i>
             </div>
