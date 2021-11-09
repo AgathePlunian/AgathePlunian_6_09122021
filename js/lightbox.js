@@ -38,7 +38,7 @@ class Lightbox {
           <span class="fleche" id="previous-img" tabindex="0" role="button">
             <img src="./images/icones/chevron-left-solid.svg" alt="previous image" />
           </span>
-          <div class="img-lightbox-container">
+          <div class="img-lightbox-container" tabindex="0" role="img" title=" `+ this.listMedias[this.indexOfMedia].description +`">
           ${this.tagMediaFactory(this.listMedias[this.indexOfMedia], this.firstName)}
           </div>
           <span class="fleche" id="next-img" tabindex="0" role="button">
@@ -112,12 +112,12 @@ class Lightbox {
     console.log("appel tagmedia factory");
     if(media.video) {
       return `<video controls>
-                <source src="images/${firstName}/${media.video}" type="video/mp4">
+                <source src="images/${firstName}/${media.video}" title="` + media.description + `" type="video/mp4">
               </video>`
       
     }
     else {
-      return `<img src="./images/${firstName}/${media.image}"/>`
+      return `<img src="./images/${firstName}/${media.image}" alt="` + media.description + `"/>`
     }
   }
   
