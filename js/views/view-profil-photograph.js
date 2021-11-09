@@ -193,7 +193,6 @@ class ViewProfil extends AbstractView {
       let thirdInput = document.getElementById("third-input-select");
   
       let selectChoices = [firstInput, secondInput, thirdInput];
-      console.log(selectChoices);
   
       for (let i = 1; i < selectChoices.length; i++) {
         
@@ -208,6 +207,21 @@ class ViewProfil extends AbstractView {
 
           firstInput.innerHTML = valueSelected;      
           inputSelected.innerHTML = contentFirstInput;
+        })
+
+        selectChoices[i].addEventListener('keypress', (event) => {
+          if(event.key === 'Enter'){
+            let contentFirstInput = firstInput.textContent;
+            
+            let inputSelected = event.target;
+            let valueSelected = event.target.innerHTML;
+                      
+            this.filterMediasBySelect(valueSelected);
+            this.closeMenuSelect();
+
+            firstInput.innerHTML = valueSelected;      
+            inputSelected.innerHTML = contentFirstInput;
+          }
         })
       }
   }
@@ -368,11 +382,11 @@ class ViewProfil extends AbstractView {
     let firstName =  this.getVariable("firstName");
     if(media.video) {
       return `<video controls>
-                  <source src="images/${firstName}/${media.video}" type="video/mp4" alt="${media.title}, closeup viex">
+                  <source src="images/${firstName}/${media.video}" type="video/mp4" title="${media.description}">
                 </video>`
     }
     else {
-      return `<img src="./images/${firstName}/${media.image}" alt="${media.title} closeup view"/>`
+      return `<img src="./images/${firstName}/${media.image}" alt="${media.description} closeup view"/>`
     }
   }
 
