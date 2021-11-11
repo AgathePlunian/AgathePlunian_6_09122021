@@ -1,5 +1,6 @@
 class Controller {
 
+  //MÉTHODE PERMETTANT L'AFFICHAGE DE LA PAGE INDEX
    async showIndex() {
     let listPhotograph = await Model.getPhotographers();
     let tagsList = await Model.getTags();
@@ -11,6 +12,8 @@ class Controller {
     view.render();  
   }
 
+
+  //MÉTHODE PERMETTANT L'AFFICHAGE DE LA PAGE PHOTOGRAPHE
    async showPhotographer() {
     let idPhotographer = Utils.getParameter('id');
     let photograph = await Model.filterPhotograph(idPhotographer);

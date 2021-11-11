@@ -230,7 +230,7 @@ class ViewProfil extends AbstractView {
   handleSelect() {
     let chevronUp = document.getElementsByClassName("chevron-up")[0];
    
-    //si le menu est ouvert
+    //SI LE MENU EST OUVERT
     if(chevronUp.classList.contains("display-chevron")) {
       this.closeMenuSelect();
     }
@@ -240,6 +240,7 @@ class ViewProfil extends AbstractView {
 
   }
 
+  //OUVRE LE MENU SELECT
   openMenuSelect() {
     let inputDate = document.getElementById("second-input-select");
     let inputTitle = document.getElementById("third-input-select");
@@ -253,6 +254,7 @@ class ViewProfil extends AbstractView {
     inputSelect.setAttribute("aria-label","Fermer menu filtrer par")
   }
   
+  //FERME LE MENU SELECT
   closeMenuSelect() {
     let inputSelect = document.getElementById("chevrons-container");
     let inputDate = document.getElementById("second-input-select");
@@ -267,7 +269,7 @@ class ViewProfil extends AbstractView {
 
   }
 
-  //FUNCTION FILTER MEDIAS BY DEFAULT + ADD EVENT LISTENER ON FILTER BY
+  //FONCTION FILTRE LES MÉDIAS PAR DÉFAULT ET AJOUT D'UN EVENT LISTENER ON FILTER BY
  
   filterMedias() {
     let mediasFiltered = this.getVariable("mediasFiltered");
@@ -278,7 +280,7 @@ class ViewProfil extends AbstractView {
       this.renderMedias();
   }
 
-  /////FONCTION EVENTLISTER SELECT /////
+  //FONCTION EVENTLISTER SELECT
 
   filterMediasBySelect(valueSelected) {  
     

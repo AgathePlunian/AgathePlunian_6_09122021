@@ -90,7 +90,7 @@ class Lightbox {
       this.checkKey(event)
     })
   }
-         
+    //NAVIGATION AVEC FLECHES     
   checkKey(event) {
   
     event = event || window.event;
@@ -107,21 +107,20 @@ class Lightbox {
     }
 }
 
-
+//AFFICHE SELON SI LE MEDIA EST UNE PHOTO OU UNE VIDEO
   tagMediaFactory(media , firstName) {
     console.log("appel tagmedia factory");
     if(media.video) {
       return `<video controls>
                 <source src="images/${firstName}/${media.video}" title="` + media.description + `" type="video/mp4">
-              </video>`
-      
+              </video>`  
     }
     else {
       return `<img src="./images/${firstName}/${media.image}" alt="` + media.description + `"/>`
     }
   }
   
-  /// EVENT LISTENER BUTTON CLOSE LIGHTBOX
+  //EVENT LISTENER BUTTON CLOSE LIGHTBOX
   closeLightbox(event) {
     let mainContainer = document.getElementsByClassName("main-container")[0];
     let lightbox = document.getElementsByClassName("lightbox-visible")[0];
@@ -135,7 +134,6 @@ class Lightbox {
 
   // LIGHTBOX SHOW PREVIOUS IMAGE ON CLICK ARROW
   showPreviousImg() {  
-
     if(this.indexOfMedia == 0) {
       this.indexOfMedia = this.listMedias.length-1;
     }

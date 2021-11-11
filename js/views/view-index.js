@@ -6,7 +6,7 @@ class ViewIndex extends AbstractView {
     this.listTagsSelected = new Array();
   }
 
-  ///ANIMATE BUTTON TOP
+  ///ANIMATION DU BOUTON POUR REVENIR EN HAUT DE LA PAGE INDEX
   animateTopButton() {
     document.addEventListener("scroll", function(){
       let button = document.getElementsByClassName("link-contain")[0];
@@ -29,6 +29,7 @@ class ViewIndex extends AbstractView {
     this.getTagInURL();
   } 
 
+  //AFFICHE LES INFOS DES PHOTOGRAPHES SOUS FORME DE CARD
   renderInfoPhotograph() {
     let listPhotograph = this.getVariable("listPhotograph");
     let section = document.getElementById("photographers");
@@ -78,11 +79,10 @@ class ViewIndex extends AbstractView {
       })
     });
   }
-
+//PERMET DE RÉCUPÉRER LE TAG CHOISI SUR LA PAGE PROFIL PHOTOGRAPHE
   getTagInURL() {
     let tagURL = this.getVariable("tagURL");
     if(tagURL != "null") {
-    
       let tagSelected = document.getElementById(tagURL);
       tagSelected.click();
     }
